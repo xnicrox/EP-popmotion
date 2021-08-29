@@ -10,7 +10,7 @@ console.log(`device::${device.mobile()}..${UA}`)
   Detect and load appropriate clock setting for the execution environment
  */
 export const defaultTimestep =
-    device.mobile() !== null ? (1 / 60) * 1000 : (1 / 30) * 1000
+    device.mobile() === null ? (1 / 60) * 1000 : (1 / 30) * 1000
 
 const getCurrentTime =
     typeof performance !== "undefined"
@@ -18,7 +18,7 @@ const getCurrentTime =
         : () => Date.now()
 
 export const onNextFrame =
-    typeof window !== "undefined"
+    typeof window !== "undefined" && device.mobile() === null
         ? (callback: FrameRequestCallback) =>
               window.requestAnimationFrame(callback)
         : (callback: FrameRequestCallback) =>
