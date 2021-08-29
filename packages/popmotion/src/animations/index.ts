@@ -5,7 +5,7 @@ import {
     KeyframeOptions,
 } from "./types"
 import { detectAnimationFromOptions } from "./utils/detect-animation-from-options"
-import sync, { cancelSync, FrameData } from "framesync"
+import sync, { cancelSync, FrameData } from "epframesync"
 import { interpolate } from "../utils/interpolate"
 import {
     loopElapsed,

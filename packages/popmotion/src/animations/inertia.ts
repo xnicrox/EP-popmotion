@@ -6,7 +6,7 @@ import {
 } from "./types"
 import { animate } from "."
 import { velocityPerSecond } from "../utils/velocity-per-second"
-import { getFrameData } from "framesync"
+import { getFrameData } from "epframesync"
 
 export function inertia({
     from = 0,

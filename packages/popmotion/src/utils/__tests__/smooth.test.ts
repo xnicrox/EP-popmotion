@@ -1,10 +1,10 @@
 import { smooth } from "../smooth"
-import sync from "framesync"
+import sync from "epframesync"
 
 test("smooth", () => {
     const smoother = smooth()
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         sync.update(() => {
             expect(smoother(100)).toBe(100)
 
