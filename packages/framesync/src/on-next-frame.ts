@@ -1,7 +1,16 @@
+import { navigator } from "./useragent"
+const MobileDetect = require("mobile-detect")
+
+const UA = String(navigator)
+const device = new MobileDetect(UA)
+
+console.log(`device::${device.mobile()}..${UA}`)
+
 /*
   Detect and load appropriate clock setting for the execution environment
  */
-export const defaultTimestep = (1 / 60) * 1000
+export const defaultTimestep =
+    device.mobile() !== null ? (1 / 60) * 1000 : (1 / 30) * 1000
 
 const getCurrentTime =
     typeof performance !== "undefined"

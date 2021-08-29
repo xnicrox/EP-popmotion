@@ -62,6 +62,7 @@
         "trailingComma": "es5"
     },
     "dependencies": {
+        "mobile-detect": "^1.4.5",
         "tslib": "^2.1.0"
     }
 }
