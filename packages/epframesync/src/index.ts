@@ -1,4 +1,4 @@
-import { onNextFrame, defaultTimestep } from "./on-next-frame"
+import { onNextFrame, defaultTimestep, onNextFrameCavas } from "./on-next-frame"
 import { createRenderStep } from "./create-render-step"
 import {
     Process,
@@ -35,9 +35,14 @@ const steps = stepsOrder.reduce((acc, key) => {
 
 const sync = stepsOrder.reduce((acc, key) => {
     const step = steps[key]
-    acc[key] = (process: Process, keepAlive = false, immediate = false) => {
-        if (!runNextFrame) startLoop()
-        return step.schedule(process, keepAlive, immediate)
+    acc[key] = (
+        process: Process,
+        keepAlive = false,
+        immediate = false,
+        canvas: boolean
+    ) => {
+        if (!runNextFrame) startLoop(canvas)
+        return step.schedule(process, keepAlive, immediate, canvas)
     }
     return acc
 }, {} as Sync)
@@ -73,11 +78,31 @@ const processFrame = (timestamp: number) => {
     }
 }
 
-const startLoop = () => {
+const processFrameCanvas = (timestamp: number) => {
+    runNextFrame = false
+
+    frame.delta = useDefaultElapsed
+        ? defaultTimestep
+        : Math.max(Math.min(timestamp - frame.timestamp, maxElapsed), 1)
+
+    frame.timestamp = timestamp
+
+    isProcessing = true
+    stepsOrder.forEach(processStep)
+    isProcessing = false
+
+    if (runNextFrame) {
+        useDefaultElapsed = false
+        onNextFrameCavas(processFrame)
+    }
+}
+
+const startLoop = (conf: boolean) => {
     runNextFrame = true
     useDefaultElapsed = true
 
-    if (!isProcessing) onNextFrame(processFrame)
+    if (!isProcessing)
+        conf ? onNextFrameCavas(processFrameCanvas) : onNextFrame(processFrame)
 }
 
 const getFrameData = () => frame

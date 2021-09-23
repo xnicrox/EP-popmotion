@@ -33,7 +33,7 @@ export interface DriverControls {
     start: () => void
     stop: () => void
 }
-export type Driver = (update: Update) => DriverControls
+export type Driver = (update: Update, canvas?: boolean) => DriverControls
 
 /**
  * Playback options common to all animations.
@@ -44,6 +44,7 @@ export interface PlaybackOptions<V> {
      * set to false, the animation must be started manually via the returned
      * play method.
      */
+    canvas?: boolean
     autoplay?: boolean
 
     driver?: Driver

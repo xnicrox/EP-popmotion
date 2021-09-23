@@ -8,7 +8,8 @@ export type Process = (data: FrameData) => void
 export type Schedule = (
     process: Process,
     keepAlive?: boolean,
-    immediate?: boolean
+    immediate?: boolean,
+    canvas?: boolean
 ) => Process
 
 export interface Step {

@@ -13,16 +13,17 @@ import {
     hasRepeatDelayElapsed,
 } from "./utils/elapsed"
 
-const framesync: Driver = (update) => {
+const framesync: Driver = (update, canvas) => {
     const passTimestamp = ({ delta }: FrameData) => update(delta)
 
     return {
-        start: () => sync.update(passTimestamp, true),
+        start: () => sync.update(passTimestamp, true, null, canvas),
         stop: () => cancelSync.update(passTimestamp),
     }
 }
 
 export function animate<V = number>({
+    canvas,
     from,
     autoplay = true,
     driver = framesync,
@@ -119,7 +120,7 @@ export function animate<V = number>({
 
     function play() {
         onPlay?.()
-        driverControls = driver(update)
+        driverControls = driver(update, canvas)
         driverControls.start()
     }
 
