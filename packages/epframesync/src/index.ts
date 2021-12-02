@@ -93,7 +93,7 @@ const processFrameCanvas = (timestamp: number) => {
 
     if (runNextFrame) {
         useDefaultElapsed = false
-        onNextFrameCavas(processFrame)
+        onNextFrameCavas(processFrameCanvas)
     }
 }
 
