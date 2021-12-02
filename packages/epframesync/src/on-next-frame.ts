@@ -1,18 +1,10 @@
-import { navigator } from "./useragent"
-const MobileDetect = require("mobile-detect")
+import { navigator, detectMobile } from "./useragent"
 
-const UA = String(navigator)
-const device = new MobileDetect(UA)
+console.log(`device mobile::${detectMobile()}`)
+console.log(`browser::${navigator}`)
 
-console.log(`device::${device.mobile()}..${UA}`)
-console.log(`device::${device.tablet()}..${UA}`)
-
-const isMobile =
-    device.mobile() === null && device.tablet() === null
-        ? (1 / 60) * 1000
-        : (1 / 30) * 1000
-const isDesktop =
-    device.mobile() === null && device.tablet() === null ? true : false
+const isMobile = !detectMobile() ? (1 / 60) * 1000 : (1 / 30) * 1000
+const isDesktop = !detectMobile() ? true : false
 
 /*
   Detect and load appropriate clock setting for the execution environment

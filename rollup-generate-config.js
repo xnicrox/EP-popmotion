@@ -1,5 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
+import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
 const makeExternalPredicate = (externalArr) => {
@@ -69,7 +70,7 @@ export default function (pkg, name = pkg.name) {
       preserveModules: true,
       dir: 'dist/es',
     },
-    plugins: [resolve()],
+    plugins: [resolve(),commonjs()],
   };
 
   const cjs = {
