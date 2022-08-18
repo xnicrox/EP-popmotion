@@ -1,6 +1,6 @@
 {
     "name": "ep-popmotion",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "The animator's toolbox",
     "author": "Matt Perry",
     "homepage": "https://popmotion.io",
@@ -52,7 +52,7 @@
         "publish-beta": "npm publish --tag beta"
     },
     "dependencies": {
-        "epframesync": "0.1.1",
+        "epframesync": "0.1.2",
         "hey-listen": "^1.0.8",
         "style-value-types": "4.1.4",
         "tslib": "^2.1.0"

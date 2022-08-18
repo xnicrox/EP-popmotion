@@ -19,9 +19,11 @@ const getCurrentTime =
 export const onNextFrame =
     typeof window !== "undefined" && isDesktop
         ? (callback: FrameRequestCallback) =>
-              window.requestAnimationFrame(callback)
+              ////window.requestAnimationFrame(callback)
+              setTimeout(() => callback(getCurrentTime()), defaultTimestep)
         : (callback: FrameRequestCallback) =>
               setTimeout(() => callback(getCurrentTime()), defaultTimestep)
 
 export const onNextFrameCavas = (callback: FrameRequestCallback) =>
-    window.requestAnimationFrame(callback)
+    ////window.requestAnimationFrame(callback)
+    setTimeout(() => callback(getCurrentTime()), defaultTimestep)
